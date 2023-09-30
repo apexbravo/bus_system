@@ -1,3 +1,4 @@
+import 'package:bus_system/auth/session_Managers.dart';
 import 'package:bus_system/src/login/login.dart';
 import 'package:bus_system/src/sample_feature/sample_item_details_view.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
@@ -13,6 +14,8 @@ import 'src/settings/settings_service.dart';
 void main() async {
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
+  WidgetsFlutterBinding.ensureInitialized();
+  await SessionManagers.initialize();
   final settingsController = SettingsController(SettingsService());
 
   // Load the user's preferred theme while the splash screen is displayed.
@@ -57,20 +60,5 @@ void main() async {
 
     // Define a function to handle named routes in order to support
     // Flutter web url navigation and deep linking.
-    onGenerateRoute: (RouteSettings routeSettings) {
-      return MaterialPageRoute<void>(
-        settings: routeSettings,
-        builder: (BuildContext context) {
-          switch (routeSettings.name) {
-            case SettingsView.routeName:
-            case SampleItemDetailsView.routeName:
-              return const SampleItemDetailsView();
-            case SampleItemListView.routeName:
-            default:
-              return const SampleItemListView();
-          }
-        },
-      );
-    },
   ));
 }

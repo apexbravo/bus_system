@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget form(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 120.0,
+        top: 100.0,
         bottom: 16,
       ),
       child: Form(
