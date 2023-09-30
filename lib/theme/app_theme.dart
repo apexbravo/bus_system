@@ -293,7 +293,7 @@ class AppTheme {
         ),
         textTheme: GoogleFonts.poppinsTextTheme(base.textTheme),
         appBarTheme: const AppBarTheme(
-            backgroundColor: brandColor,
+            backgroundColor: secondaryColor,
             elevation: 0,
             titleTextStyle: TextStyle(
                 color: Colors.white,
@@ -304,7 +304,7 @@ class AppTheme {
                 statusBarColor: brandColor),
             shape: Border(
                 bottom: BorderSide(
-              color: secondaryColor,
+              color: primaryColor,
               width: 2,
             ))),
         inputDecorationTheme: const InputDecorationTheme(

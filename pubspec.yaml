@@ -10,15 +10,18 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
+
   cloud_firestore: ^4.9.2
   flutter:
     sdk: flutter
+  flutter_feather_icons: ^2.0.0+1
   flutter_localizations:
     sdk: flutter
   flutter_session_manager: ^1.0.3
   google_fonts: ^6.1.0
   hive_flutter: ^1.1.0
   shared_preferences: ^2.2.1
+  sliver_header_delegate: ^0.0.5
   uuid: ^4.1.0
 
 dev_dependencies:

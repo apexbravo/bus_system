@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bus_system/auth/session_Managers.dart';
+import 'package:bus_system/home.dart';
 import 'package:bus_system/models/user.dart';
 import 'package:bus_system/src/app.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
@@ -85,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Text(
-                  "Whatever",
+                  "Ticketing",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 36,
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Container(
               width: 400,
-              margin: const EdgeInsets.only(top: 80),
+              margin: const EdgeInsets.only(top: 80, left: 20, right: 20),
               child: Column(
                 children: [
                   TextFormField(
@@ -200,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SampleItemListView(),
+                          builder: (context) => Home(),
                         ),
                       );
                       savelogin();
