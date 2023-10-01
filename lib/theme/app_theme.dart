@@ -283,10 +283,8 @@ class AppTheme {
         buttonTheme: base.buttonTheme.copyWith(
           buttonColor: secondaryColor,
         ),
-        errorColor: errorColor,
         scaffoldBackgroundColor: appBackground,
         cardColor: cardBackground,
-        backgroundColor: surfacePrimary,
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: secondaryColor,
           primaryContainer: brandColor,

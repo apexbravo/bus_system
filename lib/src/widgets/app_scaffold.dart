@@ -48,7 +48,7 @@ class AppScaffold extends StatefulWidget {
 class _AppScaffoldState extends State<AppScaffold> {
   @override
   Widget build(BuildContext context) {
-    if (!SessionManagers.isAuthenticated) {
+    if (SessionManagers.isAuthenticated) {
       log("User not authenticated. Redirecting to login page");
       return const LoginPage();
     }
