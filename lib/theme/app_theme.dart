@@ -73,7 +73,7 @@ class AppTheme {
       Widget? prefixIcon, BuildContext context) {
     return InputDecoration(
         floatingLabelAlignment: FloatingLabelAlignment.start,
-        contentPadding: EdgeInsets.all(0),
+        contentPadding: const EdgeInsets.all(0),
         labelStyle: const TextStyle(
             color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.w500),
         border: const OutlineInputBorder(
@@ -192,7 +192,7 @@ class AppTheme {
           Colors.white), // Set text color to white
       side: MaterialStateProperty.all<BorderSide>(
         // Define the border side
-        BorderSide(
+        const BorderSide(
           color: Colors.white, // Set the border color to your desired color
           width: 1, // Set the border width
         ),
@@ -320,13 +320,13 @@ class AppTheme {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             elevation: MaterialStateProperty.all(0),
-            textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(
+            textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 18.0,
                 color: Color(0xFF232452))),
             backgroundColor: MaterialStateProperty.all<Color>(secondaryColor),
             foregroundColor:
-                MaterialStateProperty.all<Color>(Color(0xFF232452)),
+                MaterialStateProperty.all<Color>(const Color(0xFF232452)),
             minimumSize: MaterialStateProperty.all<Size>(
                 const Size(double.maxFinite, 56)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(

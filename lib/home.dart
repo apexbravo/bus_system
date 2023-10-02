@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bus_system/auth/session_Managers.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
+import 'package:bus_system/src/reports/transaction_summary.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:bus_system/theme/app_theme.dart';
@@ -20,7 +20,8 @@ var products = [];
 
 class _HomeState extends State<Home> {
   final FlexibleHeaderDelegate _headerDelegate = FlexibleHeaderDelegate();
-  StreamController<int> _notificationCountController = StreamController<int>();
+  final StreamController<int> _notificationCountController =
+      StreamController<int>();
   late Stream<int> _notificationCountStream;
   final ScrollController _scrollController = ScrollController();
   bool _isVisible = true;
@@ -66,7 +67,7 @@ class _HomeState extends State<Home> {
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         if (AppScaffold.isMobileDevice(context) ||
             AppScaffold.isTabletDevice(context)) {
-          var _notificationCountStream = Stream<int>.value(2);
+          var notificationCountStream = Stream<int>.value(2);
           return <Widget>[
             Theme(
               data: ThemeData(
@@ -92,7 +93,7 @@ class _HomeState extends State<Home> {
                     ),
                     IconButton(
                       icon: StreamBuilder<int>(
-                        stream: _notificationCountStream,
+                        stream: notificationCountStream,
                         builder: (BuildContext context,
                             AsyncSnapshot<int> snapshot) {
                           // show the notification icon with badge if there are unread notifications
@@ -290,10 +291,10 @@ class _HomeState extends State<Home> {
                                   //           const StockMovementTabController()),
                                   // );
                                 },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(6.0),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(6.0),
                                   child: Column(
-                                    children: const [
+                                    children: [
                                       Icon(
                                         FeatherIcons.download,
                                         size: 36.0,
@@ -314,14 +315,16 @@ class _HomeState extends State<Home> {
                             SizedBox(
                               width: 90,
                               child: TextButton(
-                                onPressed: () async {
-                                  await Navigator.pushNamed(
-                                      context, '/salessummary');
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => TranSummary()));
                                 },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(6.0),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(6.0),
                                   child: Column(
-                                    children: const [
+                                    children: [
                                       Icon(
                                         FeatherIcons.fileText,
                                         size: 36.0,
@@ -346,7 +349,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   const Padding(
@@ -373,17 +376,17 @@ class _HomeState extends State<Home> {
                               width: 1.0,
                             ),
                           ),
+                          width: 50.0,
+                          height: 50.0,
                           child: Center(
                             child: Text(
                               '${index + 1}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          width: 50.0,
-                          height: 50.0,
                         ),
                         title: Text(products[index].name),
                         subtitle: Text(products[index].brand!.toString()),
