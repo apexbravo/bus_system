@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1063621179793",
+    "project_id": "bus-ticketing-e5c33",
+    "storage_bucket": "bus-ticketing-e5c33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063621179793:android:5c5f1c3f3d0eedb6640230",
+        "android_client_info": {
+          "package_name": "com.example.bus_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8o-Qjy0WzQMKW-Q-7HEf2VW6aBvvVw34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

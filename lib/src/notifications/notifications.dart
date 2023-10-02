@@ -19,8 +19,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
       isRead: false,
     ),
     NotificationData(
-      message: "Your order has been shipped!",
-      timestamp: DateTime.now().subtract(const Duration(hours: 1)),
+      message: "Prices have changed!",
+      timestamp: DateTime.now().subtract(Duration(hours: 1)),
       importanceLevel: ImportanceLevel.low,
       isRead: true,
     ),

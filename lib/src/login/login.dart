@@ -50,11 +50,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-        Center(
-          child: Column(
-            children: [
-              form(context),
-            ],
+        SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                form(context),
+              ],
+            ),
           ),
         ),
       ],

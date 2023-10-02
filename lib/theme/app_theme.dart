@@ -323,7 +323,7 @@ class AppTheme {
             textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 18.0,
-                color: Color(0xFF232452))),
+                color: Color(0xFFfFFFFF))),
             backgroundColor: MaterialStateProperty.all<Color>(secondaryColor),
             foregroundColor:
                 MaterialStateProperty.all<Color>(const Color(0xFF232452)),
