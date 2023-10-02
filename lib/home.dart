@@ -4,6 +4,7 @@ import 'package:bus_system/auth/session_Managers.dart';
 import 'package:bus_system/src/customers/customerlist.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
+import 'package:bus_system/src/transport_services/services_page.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:bus_system/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -386,7 +387,7 @@ class _HomeState extends State<Home> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const CustomersPage()),
+                                            const ServicesPage()),
                                   );
                                   //await Navigator.pushNamed(context, '/sales');
                                 },
@@ -397,12 +398,12 @@ class _HomeState extends State<Home> {
                                   child: Column(
                                     children: [
                                       Icon(
-                                        FeatherIcons.shoppingBag,
+                                        FeatherIcons.list,
                                         size: 36.0,
                                         color: primaryColor,
                                       ),
                                       Text(
-                                        "Customers",
+                                        "Services",
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.normal,
