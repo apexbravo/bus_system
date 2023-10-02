@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:bus_system/auth/session_Managers.dart';
+import 'package:bus_system/src/Forex/add_currency.dart';
+import 'package:bus_system/src/Forex/currency_list.dart';
 import 'package:bus_system/src/customers/customerlist.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
 import 'package:bus_system/src/reports/transaction_summary.dart';
@@ -422,7 +424,46 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                             ],
-                          )
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: TextButton(
+                                    onPressed: () async {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const CurrencyList()),
+                                      );
+                                      //await Navigator.pushNamed(context, '/sales');
+                                    },
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: 1.0,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Icon(
+                                            FeatherIcons.shoppingBag,
+                                            size: 36.0,
+                                            color: primaryColor,
+                                          ),
+                                          Text(
+                                            "Currency",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.center,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ])
                         ],
                       ),
                     ),
