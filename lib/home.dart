@@ -215,309 +215,310 @@ class _HomeState extends State<Home> {
       },
       body: Builder(builder: (context) {
         return SingleChildScrollView(
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                border: Border.all(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.white,
+                  ),
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0)),
                   color: Colors.white,
                 ),
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0)),
-                color: Colors.white,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text("Operations",
-                        style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.w400)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8, bottom: 8, left: 0, right: 0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () async {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SampleItemListView()),
-                                  );
-                                  //await Navigator.pushNamed(context, '/sales');
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: 1.0,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        FeatherIcons.shoppingBag,
-                                        size: 36.0,
-                                        color: primaryColor,
-                                      ),
-                                      Text(
-                                        "New\nTicket",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 12.0),
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text("Operations",
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w400)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 8, bottom: 8, left: 0, right: 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SampleItemListView()),
+                                    );
+                                    //await Navigator.pushNamed(context, '/sales');
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: 1.0,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.shoppingBag,
+                                          size: 36.0,
+                                          color: primaryColor,
+                                        ),
+                                        Text(
+                                          "New\nTicket",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12.0),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () async {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           const StockMovementTabController()),
-                                  // );
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.all(6.0),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        FeatherIcons.download,
-                                        size: 36.0,
-                                        color: primaryColor,
-                                      ),
-                                      Text("Ticket Prices",
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           const StockMovementTabController()),
+                                    // );
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(6.0),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.download,
+                                          size: 36.0,
+                                          color: primaryColor,
+                                        ),
+                                        Text("Ticket Prices",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12.0,
+                                            ),
+                                            textAlign: TextAlign.center)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                TranSummary()));
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(6.0),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.fileText,
+                                          size: 36.0,
+                                          color: primaryColor,
+                                        ),
+                                        Text(
+                                          "Ticket\nReports",
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.normal,
                                             fontSize: 12.0,
                                           ),
-                                          textAlign: TextAlign.center)
-                                    ],
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => TranSummary()));
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.all(6.0),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        FeatherIcons.fileText,
-                                        size: 36.0,
-                                        color: primaryColor,
-                                      ),
-                                      Text(
-                                        "Ticket\nReports",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 12.0,
+                                          builder: (context) =>
+                                              const CustomersPage()),
+                                    );
+                                    //await Navigator.pushNamed(context, '/sales');
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: 1.0,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.shoppingBag,
+                                          size: 36.0,
+                                          color: primaryColor,
                                         ),
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
+                                        Text(
+                                          "Customers",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12.0),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () async {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CustomersPage()),
-                                  );
-                                  //await Navigator.pushNamed(context, '/sales');
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: 1.0,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        FeatherIcons.shoppingBag,
-                                        size: 36.0,
-                                        color: primaryColor,
-                                      ),
-                                      Text(
-                                        "Customers",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 12.0),
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const CustomersPage()),
+                                    );
+                                    //await Navigator.pushNamed(context, '/sales');
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: 1.0,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.shoppingBag,
+                                          size: 36.0,
+                                          color: primaryColor,
+                                        ),
+                                        Text(
+                                          "Customers",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12.0),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () async {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CustomersPage()),
-                                  );
-                                  //await Navigator.pushNamed(context, '/sales');
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: 1.0,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        FeatherIcons.shoppingBag,
-                                        size: 36.0,
-                                        color: primaryColor,
-                                      ),
-                                      Text(
-                                        "Customers",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 12.0),
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  // SizedBox(
-                  //   height: 16,
-                  // ),
-                  // const Padding(
-                  //   padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  //   child: Text("Previous Parcel Recordings",
-                  //       style: TextStyle(
-                  //         fontSize: 16.0,
-                  //         fontWeight: FontWeight.w400,
-                  //       )),
-                  // ),
-                  // const Divider(height: 1, thickness: 1),
-                  // ListView.builder(
-                  //   physics: const NeverScrollableScrollPhysics(),
-                  //   shrinkWrap: true,
-                  //   itemCount: products.length,
-                  //   itemBuilder: (BuildContext context, int index) {
-                  //     return ListTile(
-                  //       leading: Container(
-                  //         decoration: BoxDecoration(
-                  //           shape: BoxShape.circle,
-                  //           color: Colors.white,
-                  //           border: Border.all(
-                  //             color: Colors.black54,
-                  //             width: 1.0,
-                  //           ),
-                  //         ),
-                  //         child: Center(
-                  //           child: Text(
-                  //             '${index + 1}',
-                  //             style: TextStyle(
-                  //               color: Colors.black,
-                  //               fontWeight: FontWeight.bold,
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         width: 50.0,
-                  //         height: 50.0,
-                  //       ),
-                  //       title: Text(products[index].name),
-                  //       subtitle: Text(products[index].brand!.toString()),
-                  //     );
-                  //   },
-                  // )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                    child: Text("Previous Parcel Recordings",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: products.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        leading: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.black54,
-                              width: 1.0,
-                            ),
-                          ),
-                          width: 50.0,
-                          height: 50.0,
-                          child: Center(
-                            child: Text(
-                              '${index + 1}',
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                        title: Text(products[index].name),
-                        subtitle: Text(products[index].brand!.toString()),
-                      );
-                    },
-                  )
-                ],
+                    // SizedBox(
+                    //   height: 16,
+                    // ),
+                    // const Padding(
+                    //   padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                    //   child: Text("Previous Parcel Recordings",
+                    //       style: TextStyle(
+                    //         fontSize: 16.0,
+                    //         fontWeight: FontWeight.w400,
+                    //       )),
+                    // ),
+                    // const Divider(height: 1, thickness: 1),
+                    // ListView.builder(
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   shrinkWrap: true,
+                    //   itemCount: products.length,
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     return ListTile(
+                    //       leading: Container(
+                    //         decoration: BoxDecoration(
+                    //           shape: BoxShape.circle,
+                    //           color: Colors.white,
+                    //           border: Border.all(
+                    //             color: Colors.black54,
+                    //             width: 1.0,
+                    //           ),
+                    //         ),
+                    //         child: Center(
+                    //           child: Text(
+                    //             '${index + 1}',
+                    //             style: TextStyle(
+                    //               color: Colors.black,
+                    //               fontWeight: FontWeight.bold,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         width: 50.0,
+                    //         height: 50.0,
+                    //       ),
+                    //       title: Text(products[index].name),
+                    //       subtitle: Text(products[index].brand!.toString()),
+                    //     );
+                    //   },
+                    // )
+                  ],
+                ),
               ),
-            ),
-          ]),
+              const SizedBox(
+                height: 16,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                child: Text("Previous Parcel Recordings",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w400,
+                    )),
+              ),
+              const Divider(height: 1, thickness: 1),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    leading: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.black54,
+                          width: 1.0,
+                        ),
+                      ),
+                      width: 50.0,
+                      height: 50.0,
+                      child: Center(
+                        child: Text(
+                          '${index + 1}',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: Text(products[index].name),
+                    subtitle: Text(products[index].brand!.toString()),
+                  );
+                },
+              )
+            ],
+          ),
         );
       }),
     );

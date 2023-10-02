@@ -1,7 +1,6 @@
 import 'package:bus_system/auth/session_Managers.dart';
 import 'package:bus_system/firebase_options.dart';
 import 'package:bus_system/src/login/login.dart';
-import 'package:bus_system/src/reports/transaction_summary.dart';
 import 'package:bus_system/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -42,19 +41,6 @@ class MainApp extends StatelessWidget {
         Locale('en', ''),
       ],
       home: const LoginPage(),
-      routes: {'/checkIn': (context) => const TranSummary()},
-      // Use AppLocalizations to configure the correct application title
-      // depending on the user's locale.
-      //
-      // The appTitle is defined in .arb files found in the localization
-      // directory.
-
-      // Define a light and dark color theme. Then, read the user's
-      // preferred ThemeMode (light, dark, or system default) from the
-      // SettingsController to display the correct theme.
-
-      // Define a function to handle named routes in order to support
-      // Flutter web url navigation and deep linking.
     );
   }
 }
