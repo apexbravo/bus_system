@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:bus_system/auth/session_Managers.dart';
+import 'package:bus_system/src/Forex/add_currency.dart';
+import 'package:bus_system/src/Forex/currency_list.dart';
 import 'package:bus_system/src/customers/customerlist.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
+import 'package:bus_system/src/reports/transaction_summary.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
 import 'package:bus_system/src/transport_services/services_page.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
@@ -22,7 +25,8 @@ var products = [];
 
 class _HomeState extends State<Home> {
   final FlexibleHeaderDelegate _headerDelegate = FlexibleHeaderDelegate();
-  StreamController<int> _notificationCountController = StreamController<int>();
+  final StreamController<int> _notificationCountController =
+      StreamController<int>();
   late Stream<int> _notificationCountStream;
   final ScrollController _scrollController = ScrollController();
   bool _isVisible = true;
@@ -68,7 +72,7 @@ class _HomeState extends State<Home> {
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         if (AppScaffold.isMobileDevice(context) ||
             AppScaffold.isTabletDevice(context)) {
-          var _notificationCountStream = Stream<int>.value(2);
+          var notificationCountStream = Stream<int>.value(2);
           return <Widget>[
             Theme(
               data: ThemeData(
@@ -94,7 +98,7 @@ class _HomeState extends State<Home> {
                     ),
                     IconButton(
                       icon: StreamBuilder<int>(
-                        stream: _notificationCountStream,
+                        stream: notificationCountStream,
                         builder: (BuildContext context,
                             AsyncSnapshot<int> snapshot) {
                           // show the notification icon with badge if there are unread notifications
@@ -214,260 +218,349 @@ class _HomeState extends State<Home> {
       },
       body: Builder(builder: (context) {
         return SingleChildScrollView(
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                border: Border.all(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.white,
+                  ),
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0)),
                   color: Colors.white,
                 ),
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0)),
-                color: Colors.white,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text("Operations",
-                        style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.w400)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8, bottom: 8, left: 0, right: 0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () async {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SampleItemListView()),
-                                  );
-                                  //await Navigator.pushNamed(context, '/sales');
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: 1.0,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        FeatherIcons.shoppingBag,
-                                        size: 36.0,
-                                        color: primaryColor,
-                                      ),
-                                      Text(
-                                        "New\nTicket",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 12.0),
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text("Operations",
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w400)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 8, bottom: 8, left: 0, right: 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SampleItemListView()),
+                                    );
+                                    //await Navigator.pushNamed(context, '/sales');
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: 1.0,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.shoppingBag,
+                                          size: 36.0,
+                                          color: primaryColor,
+                                        ),
+                                        Text(
+                                          "New\nTicket",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12.0),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () async {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           const StockMovementTabController()),
-                                  // );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(6.0),
-                                  child: Column(
-                                    children: const [
-                                      Icon(
-                                        FeatherIcons.download,
-                                        size: 36.0,
-                                        color: primaryColor,
-                                      ),
-                                      Text("Ticket Prices",
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           const StockMovementTabController()),
+                                    // );
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(6.0),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.download,
+                                          size: 36.0,
+                                          color: primaryColor,
+                                        ),
+                                        Text("Ticket Prices",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12.0,
+                                            ),
+                                            textAlign: TextAlign.center)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                TranSummary()));
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(6.0),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.fileText,
+                                          size: 36.0,
+                                          color: primaryColor,
+                                        ),
+                                        Text(
+                                          "Ticket\nReports",
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.normal,
                                             fontSize: 12.0,
                                           ),
-                                          textAlign: TextAlign.center)
-                                    ],
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () async {
-                                  await Navigator.pushNamed(
-                                      context, '/salessummary');
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(6.0),
-                                  child: Column(
-                                    children: const [
-                                      Icon(
-                                        FeatherIcons.fileText,
-                                        size: 36.0,
-                                        color: primaryColor,
-                                      ),
-                                      Text(
-                                        "Ticket\nReports",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 12.0,
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const CustomersPage()),
+                                    );
+                                    //await Navigator.pushNamed(context, '/sales');
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: 1.0,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.shoppingBag,
+                                          size: 36.0,
+                                          color: primaryColor,
                                         ),
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
+                                        Text(
+                                          "Customers",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12.0),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () async {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CustomersPage()),
-                                  );
-                                  //await Navigator.pushNamed(context, '/sales');
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: 1.0,
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ServicesPage()),
+                                    );
+                                    //await Navigator.pushNamed(context, '/sales');
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: 1.0,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.shoppingBag,
+                                          size: 36.0,
+                                          color: primaryColor,
+                                        ),
+                                        Text(
+                                          "Services",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12.0),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        FeatherIcons.shoppingBag,
-                                        size: 36.0,
-                                        color: primaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: TextButton(
+                                    onPressed: () async {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const CurrencyList()),
+                                      );
+                                      //await Navigator.pushNamed(context, '/sales');
+                                    },
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: 1.0,
                                       ),
-                                      Text(
-                                        "Customers",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 12.0),
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () async {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ServicesPage()),
-                                  );
-                                  //await Navigator.pushNamed(context, '/sales');
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: 1.0,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        FeatherIcons.list,
-                                        size: 36.0,
-                                        color: primaryColor,
+                                      child: Column(
+                                        children: [
+                                          Icon(
+                                            FeatherIcons.shoppingBag,
+                                            size: 36.0,
+                                            color: primaryColor,
+                                          ),
+                                          Text(
+                                            "Currency",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.center,
+                                          )
+                                        ],
                                       ),
-                                      Text(
-                                        "Services",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 12.0),
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                              ])
+                        ],
+                      ),
                     ),
-                  ),
-                  // SizedBox(
-                  //   height: 16,
-                  // ),
-                  // const Padding(
-                  //   padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  //   child: Text("Previous Parcel Recordings",
-                  //       style: TextStyle(
-                  //         fontSize: 16.0,
-                  //         fontWeight: FontWeight.w400,
-                  //       )),
-                  // ),
-                  // const Divider(height: 1, thickness: 1),
-                  // ListView.builder(
-                  //   physics: const NeverScrollableScrollPhysics(),
-                  //   shrinkWrap: true,
-                  //   itemCount: products.length,
-                  //   itemBuilder: (BuildContext context, int index) {
-                  //     return ListTile(
-                  //       leading: Container(
-                  //         decoration: BoxDecoration(
-                  //           shape: BoxShape.circle,
-                  //           color: Colors.white,
-                  //           border: Border.all(
-                  //             color: Colors.black54,
-                  //             width: 1.0,
-                  //           ),
-                  //         ),
-                  //         child: Center(
-                  //           child: Text(
-                  //             '${index + 1}',
-                  //             style: TextStyle(
-                  //               color: Colors.black,
-                  //               fontWeight: FontWeight.bold,
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         width: 50.0,
-                  //         height: 50.0,
-                  //       ),
-                  //       title: Text(products[index].name),
-                  //       subtitle: Text(products[index].brand!.toString()),
-                  //     );
-                  //   },
-                  // )
-                ],
+                    // SizedBox(
+                    //   height: 16,
+                    // ),
+                    // const Padding(
+                    //   padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                    //   child: Text("Previous Parcel Recordings",
+                    //       style: TextStyle(
+                    //         fontSize: 16.0,
+                    //         fontWeight: FontWeight.w400,
+                    //       )),
+                    // ),
+                    // const Divider(height: 1, thickness: 1),
+                    // ListView.builder(
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   shrinkWrap: true,
+                    //   itemCount: products.length,
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     return ListTile(
+                    //       leading: Container(
+                    //         decoration: BoxDecoration(
+                    //           shape: BoxShape.circle,
+                    //           color: Colors.white,
+                    //           border: Border.all(
+                    //             color: Colors.black54,
+                    //             width: 1.0,
+                    //           ),
+                    //         ),
+                    //         child: Center(
+                    //           child: Text(
+                    //             '${index + 1}',
+                    //             style: TextStyle(
+                    //               color: Colors.black,
+                    //               fontWeight: FontWeight.bold,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         width: 50.0,
+                    //         height: 50.0,
+                    //       ),
+                    //       title: Text(products[index].name),
+                    //       subtitle: Text(products[index].brand!.toString()),
+                    //     );
+                    //   },
+                    // )
+                  ],
+                ),
               ),
-            ),
-          ]),
+              const SizedBox(
+                height: 16,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                child: Text("Previous Parcel Recordings",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w400,
+                    )),
+              ),
+              const Divider(height: 1, thickness: 1),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    leading: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.black54,
+                          width: 1.0,
+                        ),
+                      ),
+                      width: 50.0,
+                      height: 50.0,
+                      child: Center(
+                        child: Text(
+                          '${index + 1}',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: Text(products[index].name),
+                    subtitle: Text(products[index].brand!.toString()),
+                  );
+                },
+              )
+            ],
+          ),
         );
       }),
     );

@@ -14,7 +14,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   List<NotificationData> notifications = [
     NotificationData(
       message: "You have a new message!",
-      timestamp: DateTime.now().subtract(Duration(minutes: 5)),
+      timestamp: DateTime.now().subtract(const Duration(minutes: 5)),
       importanceLevel: ImportanceLevel.medium,
       isRead: false,
     ),
@@ -26,7 +26,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     ),
     NotificationData(
       message: "Don't forget to complete your profile!",
-      timestamp: DateTime.now().subtract(Duration(days: 2)),
+      timestamp: DateTime.now().subtract(const Duration(days: 2)),
       importanceLevel: ImportanceLevel.high,
       isRead: false,
     ),
@@ -37,7 +37,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     return AppScaffold(
       currentTab: 'Notifications',
       appBar: AppBar(
-        title: Text("Notifications"),
+        title: const Text("Notifications"),
       ),
       body: ListView.builder(
         itemCount: notifications.length,
@@ -48,7 +48,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
               _formatTimestamp(notifications[index].timestamp),
             ),
             trailing: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -103,18 +103,18 @@ class _NotificationsPageState extends State<NotificationsPage> {
     switch (level) {
       case ImportanceLevel.low:
         return [
-          Color(0xFF24C0EB),
-          Color(0xFF90F7EC),
+          const Color(0xFF24C0EB),
+          const Color(0xFF90F7EC),
         ];
       case ImportanceLevel.medium:
         return [
-          Color(0xFFFFD119),
-          Color(0xFFFFB140),
+          const Color(0xFFFFD119),
+          const Color(0xFFFFB140),
         ];
       case ImportanceLevel.high:
         return [
-          Color(0xFFFF4D4D),
-          Color(0xFFBE2323),
+          const Color(0xFFFF4D4D),
+          const Color(0xFFBE2323),
         ];
       default:
         return [

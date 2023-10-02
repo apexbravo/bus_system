@@ -3,14 +3,11 @@ import 'dart:convert';
 import 'package:bus_system/auth/session_Managers.dart';
 import 'package:bus_system/home.dart';
 import 'package:bus_system/models/user.dart';
-import 'package:bus_system/src/app.dart';
-import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:bus_system/theme/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -203,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Home(),
+                          builder: (context) => const Home(),
                         ),
                       );
                       savelogin();
@@ -224,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ],
                           )
-                        : Text(
+                        : const Text(
                             "LOGIN",
                             style: TextStyle(
                               color: buttonPrimaryTextColor,
@@ -338,7 +335,7 @@ class _LoginPageState extends State<LoginPage> {
       if (hashedPassword == user.password) {
         // Passwords match, grant access and perform necessary actions (e.g., navigate to home screen)
         // For example, you can call a function to handle successful login
-        user.tokenExpiryDate = DateTime.now().add(Duration(hours: 1));
+        user.tokenExpiryDate = DateTime.now().add(const Duration(hours: 1));
 
         SessionManagers.signIn(user);
 

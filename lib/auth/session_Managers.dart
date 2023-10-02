@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:bus_system/models/user.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,9 +11,9 @@ class SessionManagers {
 
   static Future<void> signIn(User user) async {
     _currentUser = user;
-    DateTime tokenExpiry = DateTime.now().add(Duration(hours: 1));
+    DateTime tokenExpiry = DateTime.now().add(const Duration(hours: 1));
     user.tokenExpiryDate = tokenExpiry;
-    await SessionManager().set('currentUser', JsonEncoder().convert(user));
+    await SessionManager().set('currentUser', const JsonEncoder().convert(user));
     print(user.toJson());
   }
 
@@ -34,7 +33,7 @@ class SessionManagers {
     await clear();
     if (currentUser != null) {
       currentUser!.tokenExpiryDate =
-          DateTime.now().subtract(Duration(hours: 1));
+          DateTime.now().subtract(const Duration(hours: 1));
     }
     Navigator.pushReplacementNamed(context, '/login');
   }
