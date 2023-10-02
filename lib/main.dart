@@ -1,17 +1,21 @@
 import 'package:bus_system/auth/session_Managers.dart';
+import 'package:bus_system/firebase_options.dart';
 import 'package:bus_system/src/login/login.dart';
 import 'package:bus_system/theme/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
-
 Future<void> main() async {
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   WidgetsFlutterBinding.ensureInitialized();
   await SessionManagers.initialize();
+   await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final settingsController = SettingsController(SettingsService());
 
   // Load the user's preferred theme while the splash screen is displayed.

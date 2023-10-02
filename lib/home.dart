@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bus_system/auth/session_Managers.dart';
+import 'package:bus_system/src/customers/customerlist.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
@@ -79,7 +80,7 @@ class _HomeState extends State<Home> {
                   statusBarHeight: MediaQuery.of(context).padding.top,
                   expandedHeight: 240,
                   background: MutableBackground(
-                    collapsedColor: primaryColor,
+                    collapsedColor: secondaryColor,
                     expandedWidget: Image.asset(
                       'assets/images/loginImage.png',
                       fit: BoxFit.cover,
@@ -243,8 +244,7 @@ class _HomeState extends State<Home> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            SizedBox(
-                              width: 70,
+                            Expanded(
                               child: TextButton(
                                 onPressed: () async {
                                   Navigator.push(
@@ -279,8 +279,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 90,
+                            Expanded(
                               child: TextButton(
                                 onPressed: () async {
                                   // Navigator.push(
@@ -311,8 +310,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 90,
+                            Expanded(
                               child: TextButton(
                                 onPressed: () async {
                                   await Navigator.pushNamed(
@@ -343,53 +341,93 @@ class _HomeState extends State<Home> {
                             ),
                           ],
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () async {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CustomersPage()),
+                                  );
+                                  //await Navigator.pushNamed(context, '/sales');
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.only(
+                                    bottom: 1.0,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        FeatherIcons.shoppingBag,
+                                        size: 36.0,
+                                        color: primaryColor,
+                                      ),
+                                      Text(
+                                        "Customers",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 12.0),
+                                        textAlign: TextAlign.center,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                    child: Text("Previous Parcel Recordings",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: products.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        leading: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.black54,
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              '${index + 1}',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          width: 50.0,
-                          height: 50.0,
-                        ),
-                        title: Text(products[index].name),
-                        subtitle: Text(products[index].brand!.toString()),
-                      );
-                    },
-                  )
+                  // SizedBox(
+                  //   height: 16,
+                  // ),
+                  // const Padding(
+                  //   padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                  //   child: Text("Previous Parcel Recordings",
+                  //       style: TextStyle(
+                  //         fontSize: 16.0,
+                  //         fontWeight: FontWeight.w400,
+                  //       )),
+                  // ),
+                  // const Divider(height: 1, thickness: 1),
+                  // ListView.builder(
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  //   shrinkWrap: true,
+                  //   itemCount: products.length,
+                  //   itemBuilder: (BuildContext context, int index) {
+                  //     return ListTile(
+                  //       leading: Container(
+                  //         decoration: BoxDecoration(
+                  //           shape: BoxShape.circle,
+                  //           color: Colors.white,
+                  //           border: Border.all(
+                  //             color: Colors.black54,
+                  //             width: 1.0,
+                  //           ),
+                  //         ),
+                  //         child: Center(
+                  //           child: Text(
+                  //             '${index + 1}',
+                  //             style: TextStyle(
+                  //               color: Colors.black,
+                  //               fontWeight: FontWeight.bold,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         width: 50.0,
+                  //         height: 50.0,
+                  //       ),
+                  //       title: Text(products[index].name),
+                  //       subtitle: Text(products[index].brand!.toString()),
+                  //     );
+                  //   },
+                  // )
                 ],
               ),
             ),
