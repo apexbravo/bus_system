@@ -1,4 +1,5 @@
 import 'package:bus_system/models/currency.dart';
+import 'package:bus_system/models/guid.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +8,10 @@ import '../../theme/app_theme.dart';
 import 'currency_list.dart';
 
 class AddCurrency extends StatefulWidget {
-  const AddCurrency({super.key});
+  const AddCurrency({Key? key}) : super(key: key);
 
   @override
-  State<AddCurrency> createState() => _AddCurrencyState();
+  _AddCurrencyState createState() => _AddCurrencyState();
 }
 
 class _AddCurrencyState extends State<AddCurrency> {
@@ -20,13 +21,15 @@ class _AddCurrencyState extends State<AddCurrency> {
   late String _symbol;
   late double exchangeRate;
   late DateTime lastUpdate;
-  void _saveForm() {
+
+  void saveForm() {
     final isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) {
       return;
     }
     _formKey.currentState?.save();
     final newCurrency = Currency(
+        id: Guid.newId(),
         code: code,
         name: _curencyName,
         rate: exchangeRate,
@@ -45,7 +48,7 @@ class _AddCurrencyState extends State<AddCurrency> {
     // You can now do something with the newCustomer object, like adding it to a list or storing it in a database.
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const CurrencyList()),
+      MaterialPageRoute(builder: (context) => CurrencyList()),
     );
   }
 
@@ -60,7 +63,7 @@ class _AddCurrencyState extends State<AddCurrency> {
 
   Widget addCurrency(BuildContext context) {
     return AppScaffold(
-      currentTab: "",
+      currentTab: "Currency",
       appBar: AppBar(
         title: Text("Add currency"),
       ),
@@ -70,99 +73,86 @@ class _AddCurrencyState extends State<AddCurrency> {
           child: Container(
             decoration: BoxDecoration(),
             child: Form(
+                key: _formKey,
                 child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Name',
-                  ),
-                  validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      return 'Please enter cuurency name.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    code = value!;
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Name',
-                  ),
-                  validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      return 'Please enter a name.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _curencyName = value!;
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Name',
-                  ),
-                  validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      return 'Please enter a name.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _symbol = value!;
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Name',
-                  ),
-                  validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      return 'Please enter a name.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    exchangeRate = value! as double;
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Name',
-                  ),
-                  validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      return 'Please enter a name.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    lastUpdate = value! as DateTime;
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  onPressed: _saveForm,
-                  child: const Text('Save'),
-                ),
-              ],
-            )),
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Currency code',
+                      ),
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Please enter currency code.';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        code = value!;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Currency name',
+                      ),
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Please enter a name.';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _curencyName = value!;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Symbol',
+                      ),
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Please enter currency symbol.';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _symbol = value!;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Rate',
+                      ),
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Please enter  currency rate.';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        exchangeRate = double.parse(value!);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: saveForm,
+                      child: const Text('Save'),
+                    ),
+                  ],
+                )),
           ),
         ),
       ),

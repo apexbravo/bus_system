@@ -5,6 +5,7 @@ import 'package:bus_system/src/Forex/add_currency.dart';
 import 'package:bus_system/src/Forex/currency_list.dart';
 import 'package:bus_system/src/customers/customerlist.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
+import 'package:bus_system/src/payment_methods/method_list.dart';
 import 'package:bus_system/src/reports/transaction_summary.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
@@ -446,12 +447,47 @@ class _HomeState extends State<Home> {
                                       child: Column(
                                         children: [
                                           Icon(
-                                            FeatherIcons.shoppingBag,
+                                            FeatherIcons.dollarSign,
                                             size: 36.0,
                                             color: primaryColor,
                                           ),
                                           Text(
                                             "Currency",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.center,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: TextButton(
+                                    onPressed: () async {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MethodList()),
+                                      );
+                                      //await Navigator.pushNamed(context, '/sales');
+                                    },
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: 1.0,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Icon(
+                                            FeatherIcons.menu,
+                                            size: 36.0,
+                                            color: primaryColor,
+                                          ),
+                                          Text(
+                                            "payment method",
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.normal,
