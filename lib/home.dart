@@ -5,6 +5,7 @@ import 'package:bus_system/src/Forex/add_currency.dart';
 import 'package:bus_system/src/Forex/currency_list.dart';
 import 'package:bus_system/src/customers/customerlist.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
+import 'package:bus_system/src/receipting/new_ticket/new_ticket_tab_controller.dart';
 import 'package:bus_system/src/reports/transaction_summary.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
 import 'package:bus_system/src/transport_services/services_page.dart';
@@ -258,7 +259,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const SampleItemListView()),
+                                              const NewTicketTabController()),
                                     );
                                     //await Navigator.pushNamed(context, '/sales');
                                   },
