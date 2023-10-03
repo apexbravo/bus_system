@@ -1,31 +1,31 @@
-import 'package:bus_system/models/currency.dart';
-import 'package:bus_system/src/Forex/currency_details.dart';
+import 'package:bus_system/models/payment_method.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../../theme/app_theme.dart';
-import 'add_currency.dart';
+import 'add_method.dart';
+import 'method_details.dart';
 
-class CurrencyList extends StatefulWidget {
-  const CurrencyList({super.key});
+class MethodList extends StatefulWidget {
+  const MethodList({super.key});
 
   @override
-  State<CurrencyList> createState() => _CurrencyListState();
+  State<MethodList> createState() => _MethodListState();
 }
 
-class _CurrencyListState extends State<CurrencyList> {
+class _MethodListState extends State<MethodList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.defaultTheme.cardColor,
       resizeToAvoidBottomInset: false,
-      body: currencyMobile(context),
+      body: methodList(context),
     );
   }
 
-  Widget currencyMobile(BuildContext context) {
+  Widget methodList(BuildContext context) {
     return AppScaffold(
         floatingActionButton: FloatingActionButton(
           backgroundColor: primaryColor,
@@ -33,7 +33,7 @@ class _CurrencyListState extends State<CurrencyList> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddCurrency(),
+                builder: (context) => AddMethod(),
               ),
             );
           },
@@ -44,7 +44,7 @@ class _CurrencyListState extends State<CurrencyList> {
         ),
         currentTab: "",
         appBar: AppBar(
-          title: Text("Currencies"),
+          title: Text("Payment methods"),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +59,7 @@ class _CurrencyListState extends State<CurrencyList> {
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: FirebaseFirestore.instance
-                    .collection('currencies')
+                    .collection('methods')
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -69,36 +69,34 @@ class _CurrencyListState extends State<CurrencyList> {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   }
 
-                  final List<Currency> currencies = snapshot.data!.docs
-                      .map((doc) => Currency.fromJson(doc.data()))
+                  final List<PaymentMethod> methods = snapshot.data!.docs
+                      .map((doc) => PaymentMethod.fromJson(doc.data()))
                       .toList();
 
                   return ListView.builder(
-                    itemCount: currencies.length,
+                    itemCount: methods.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final currency = currencies[index];
+                      final method = methods[index];
                       return ListTile(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CurrencyDetails(),
+                              builder: (context) => MethodDetails(),
                             ),
                           );
                         },
                         leading: Text(""),
-                        title: Text(currency.symbol),
+                        title: Text(method.name ?? ''),
                         subtitle: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(height: 4),
-                                Text(currency.name),
+                                Text(method.name ?? ''),
                               ],
                             ),
-                            Text(currency.rate.toStringAsFixed(2)),
                           ],
                         ),
                       );
