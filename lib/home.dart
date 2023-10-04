@@ -6,8 +6,10 @@ import 'package:bus_system/src/Forex/currency_list.dart';
 import 'package:bus_system/src/customers/customerlist.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
 import 'package:bus_system/src/payment_methods/method_list.dart';
+import 'package:bus_system/src/receipting/new_ticket/new_ticket_tab_controller.dart';
 import 'package:bus_system/src/reports/transaction_summary.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
+import 'package:bus_system/src/transport_services/services_page.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:bus_system/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -258,7 +260,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const SampleItemListView()),
+                                              const NewTicketTabController()),
                                     );
                                     //await Navigator.pushNamed(context, '/sales');
                                   },
@@ -396,7 +398,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const CustomersPage()),
+                                              const ServicesPage()),
                                     );
                                     //await Navigator.pushNamed(context, '/sales');
                                   },
@@ -412,7 +414,7 @@ class _HomeState extends State<Home> {
                                           color: primaryColor,
                                         ),
                                         Text(
-                                          "Customers",
+                                          "Services",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.normal,
