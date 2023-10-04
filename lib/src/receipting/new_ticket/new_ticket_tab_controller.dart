@@ -53,7 +53,7 @@ class _NewTicketTabControllerState extends State<NewTicketTabController>
         currentTab: "New Sale",
         pageTitle: "New Sale",
         appBar: AppBar(
-          title: const Text("New sale"),
+          title: const Text("New Ticket"),
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
@@ -64,10 +64,10 @@ class _NewTicketTabControllerState extends State<NewTicketTabController>
             controller: _tabController,
             tabs: const [
               Tab(
-                text: "CHECKOUT",
+                text: "TICKET DETAILS",
               ),
               Tab(
-                text: "SELECT PRODUCTS",
+                text: "SELECT SERVICE",
               ),
             ],
           ),
@@ -101,6 +101,7 @@ class _NewTicketTabControllerState extends State<NewTicketTabController>
                     }
                   });
                 },
+                invoiceLines: invoiceLines,
               ),
             ],
           );

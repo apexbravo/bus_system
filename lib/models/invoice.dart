@@ -1,3 +1,4 @@
+import 'package:bus_system/models/currency.dart';
 import 'package:bus_system/models/customer.dart';
 import 'package:bus_system/models/enums/invoice_status.dart';
 import 'package:bus_system/models/invoice_line.dart';
@@ -11,6 +12,7 @@ class Invoice {
   InvoiceStatus status;
   double amountTendered;
   Customer customer;
+  Currency currency;
 
   Invoice({
     required this.creationDate,
@@ -20,5 +22,8 @@ class Invoice {
     required this.status,
     required this.amountTendered,
     required this.customer,
+    required this.currency,
   });
+
+  double get total => 10;
 }

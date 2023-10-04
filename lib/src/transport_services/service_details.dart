@@ -1,3 +1,4 @@
+import 'package:bus_system/models/db.dart';
 import 'package:bus_system/models/transport_service.dart';
 import 'package:bus_system/src/helper.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
@@ -54,7 +55,8 @@ class _ServiceDetailsState extends State<ServiceDetails> {
             if (widget.service.description != null)
               dataAttribute("Description", widget.service.description!),
             if (widget.service.price != null)
-              dataAttribute("Cost", toMoney(widget.service.price!.amount))
+              dataAttribute("Cost",
+                  toMoney(widget.service.price!.amount, Db.currencies.first))
           ],
         ),
       ),
