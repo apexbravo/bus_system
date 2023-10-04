@@ -1,8 +1,22 @@
+import 'dart:math';
+
+import 'package:bus_system/models/customer.dart';
+import 'package:bus_system/models/db.dart';
+import 'package:bus_system/models/enums/invoice_status.dart';
+import 'package:bus_system/models/invoice.dart';
 import 'package:bus_system/models/invoice_line.dart';
+import 'package:bus_system/models/payment_method.dart';
+import 'package:bus_system/models/role.dart';
 import 'package:bus_system/models/transport_service.dart';
+import 'package:bus_system/models/user.dart';
+import 'package:bus_system/src/receipting/transactions/invoice_page.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/currency.dart';
 import '../../../theme/app_theme.dart';
+import '../../customers/customer_add.dart';
+import '../../helper.dart';
 
 class TicketLinesPage extends StatefulWidget {
   List<InvoiceLine> invoiceLines = [];
@@ -14,7 +28,8 @@ class TicketLinesPage extends StatefulWidget {
 }
 
 class TicketLinesPageState extends State<TicketLinesPage> {
-  final TextEditingController _quantityController = TextEditingController();
+  final TextEditingController costController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
   final TextEditingController _tenderedAmountController =
       TextEditingController();
   double _change = 0.0;
@@ -27,81 +42,221 @@ class TicketLinesPageState extends State<TicketLinesPage> {
     return total;
   }
 
+  var btnTextStyle = const TextStyle(
+    fontSize: 16,
+  );
+  Currency currency = Db.currencies.first;
+  PaymentMethod? paymentMethod;
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: ListView.separated(
-            separatorBuilder: (builder, context) => const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Divider(
-                  thickness: 1,
-                  height: 1,
-                )),
-            itemCount: widget.invoiceLines.length,
-            itemBuilder: (context, index) {
-              return Dismissible(
-                key: Key(index.toString()),
-                onDismissed: (direction) {
-                  setState(() {
-                    widget.invoiceLines.removeAt(index);
-                  });
-                },
-                background: Container(
-                  color: Colors.red,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Icon(Icons.delete, color: Colors.white),
-                      SizedBox(width: 10),
-                      Text(
-                        'Delete',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Currency'),
+                  SizedBox(
+                    width: 175,
+                    child: DropdownSearch<Currency>(
+                      dropdownButtonProps: const DropdownButtonProps(
+                          padding: EdgeInsets.all(
+                        14,
+                      )),
+                      popupProps: const PopupProps.menu(
+                        fit: FlexFit.loose,
+                        showSelectedItems: true,
+                        menuProps: MenuProps(
+                          backgroundColor: Colors.white,
+                          elevation: 2,
                         ),
                       ),
-                      SizedBox(width: 10),
-                    ],
-                  ),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    // display menu here
-                    showPopupMenu(context, index);
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.invoiceLines[index].service.name,
-                              style: TextStyle(
-                                fontSize: 17.0,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Price: \$${widget.invoiceLines[index].unitCost.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontSize: 16.0,
-                                color: labelText,
-                              ),
-                            ),
-                          ],
+                      items: Db.currencies,
+                      dropdownDecoratorProps: const DropDownDecoratorProps(
+                        dropdownSearchDecoration: InputDecoration(
+                          labelStyle: TextStyle(
+                            fontSize: 18,
+                          ),
+                          fillColor: Colors.transparent,
                         ),
-                      ],
+                      ),
+                      selectedItem: currency,
+                      itemAsString: (item) => item.id,
+                      compareFn: (item1, item2) {
+                        if (item1.id == item2.id) return true;
+                        return false;
+                      },
+                      onChanged: (value) => setState(() {
+                        //currency = value!;
+                      }),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Payment method'),
+                  SizedBox(
+                    width: 175,
+                    child: DropdownSearch<PaymentMethod>(
+                      dropdownButtonProps: const DropdownButtonProps(
+                          padding: EdgeInsets.all(
+                        14,
+                      )),
+                      popupProps: const PopupProps.menu(
+                        fit: FlexFit.loose,
+                        showSelectedItems: true,
+                        menuProps: MenuProps(
+                          backgroundColor: Colors.white,
+                          elevation: 2,
+                        ),
+                      ),
+                      items: Db.paymentMethods,
+                      dropdownDecoratorProps: const DropDownDecoratorProps(
+                        dropdownSearchDecoration: InputDecoration(
+                          labelStyle: TextStyle(
+                            fontSize: 18,
+                          ),
+                          fillColor: Colors.transparent,
+                        ),
+                      ),
+                      selectedItem: paymentMethod,
+                      itemAsString: (item) => item.name,
+                      compareFn: (item1, item2) {
+                        if (item1.id == item2.id) return true;
+                        return false;
+                      },
+                      onChanged: (value) => setState(() {
+                        paymentMethod = value!;
+                      }),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Customer'),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownSearch<Currency>(
+                          dropdownButtonProps: const DropdownButtonProps(
+                              padding: EdgeInsets.all(
+                            14,
+                          )),
+                          popupProps: const PopupProps.menu(
+                            fit: FlexFit.loose,
+                            showSelectedItems: true,
+                            menuProps: MenuProps(
+                              backgroundColor: Colors.white,
+                              elevation: 2,
+                            ),
+                          ),
+                          items: [],
+                          dropdownDecoratorProps: const DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                              labelStyle: TextStyle(
+                                fontSize: 18,
+                              ),
+                              fillColor: Colors.transparent,
+                            ),
+                          ),
+                          selectedItem: null,
+                          itemAsString: (item) => item.id,
+                          compareFn: (item1, item2) {
+                            if (item1.id == item2.id) return true;
+                            return false;
+                          },
+                          onChanged: (value) => setState(() {
+                            //currency = value!;
+                          }),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      SizedBox(
+                        width: 100,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AddCustomerPage(),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.add),
+                          label: Text("Add", style: btnTextStyle),
+                          style: AppTheme.tertiaryBtnStyle,
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+        const Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text("Ticket items"),
+        ),
+        Expanded(
+          child: Card(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 8,
+              vertical: 0,
+            ),
+            child: ListView.separated(
+              separatorBuilder: (builder, context) => const Divider(
+                thickness: 1,
+                height: 1,
+              ),
+              itemCount: widget.invoiceLines.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  onTap: () {
+                    editLinePopup(index);
+                  },
+                  leading: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          widget.invoiceLines.removeAt(index);
+                        });
+                      },
+                      icon: const Icon(Icons.delete)),
+                  title: Text(
+                    widget.invoiceLines[index].service.name,
+                  ),
+                  subtitle: Text(
+                    '${widget.invoiceLines[index].service.category ?? ""} ${widget.invoiceLines[index].service.category != null && widget.invoiceLines[index].description != null ? "-" : ""} ${widget.invoiceLines[index].description ?? ""}',
+                  ),
+                  trailing: Text(
+                    toMoney(widget.invoiceLines[index].unitCost, currency),
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                      color: labelText,
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
         Divider(),
@@ -120,7 +275,7 @@ class TicketLinesPageState extends State<TicketLinesPage> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 16.0,
               ),
               FloatingActionButton(
@@ -151,11 +306,11 @@ class TicketLinesPageState extends State<TicketLinesPage> {
                                     });
                                   },
                                   keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: 'Tendered amount',
                                   ),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 Text(
                                   'Change: \$${_change.toStringAsFixed(2)}',
                                   style: TextStyle(
@@ -186,7 +341,33 @@ class TicketLinesPageState extends State<TicketLinesPage> {
                               _change = tenderedAmount - totalPrice;
                               // savetransaction(widget.products, _quantities,
                               //     totalPrice, tenderedAmount, _change);
-                              setState(() {});
+                              setState(() {
+                                var invoice = Invoice(
+                                    creationDate: DateTime.now(),
+                                    number: "INV1002",
+                                    creator: User(
+                                        name: "Daniel",
+                                        initials: "initials",
+                                        email: "d@gmail.com",
+                                        userRole: Role("name", Set())),
+                                    lines: widget.invoiceLines,
+                                    status: InvoiceStatus.settled,
+                                    amountTendered: double.parse(
+                                        _tenderedAmountController.text),
+                                    customer: Customer(
+                                        fullname: "Peter Tej",
+                                        email: "ptej@gmail.com",
+                                        phone: "0775676543"),
+                                    currency: currency);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => InvoicePage(
+                                      invoice: invoice,
+                                    ),
+                                  ),
+                                );
+                              });
                             },
                           ),
                         ],
@@ -203,108 +384,62 @@ class TicketLinesPageState extends State<TicketLinesPage> {
     );
   }
 
-  void showPopupMenu(BuildContext context, int index) async {
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Stack(
-          children: [
-            // Darkened background
-            Container(
-              color: Colors.black54,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-            // Menu
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.center,
-                child: Card(
-                  color: primaryColor,
-                  elevation: 8.0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Product Options : ${widget.invoiceLines[index].service.name}",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const PopupMenuItem(
-                          value: "edit",
-                          child: Text(
-                            "Edit Quantity",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        const PopupMenuItem(
-                          value: "remove",
-                          child: Text(
-                            "Remove Product",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        const PopupMenuItem(
-                          value: "details",
-                          child: Text(
-                            "View Details",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    ).then((value) {
-      switch (value) {
-        case "edit":
-          _editQuantity(index);
-          break;
-        case "remove":
-          _removeProduct(index);
-          break;
-        case "details":
-          break;
-      }
-    });
-  }
-
-  void _editQuantity(int index) {
+  void editLinePopup(int index) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Edit Quantity'),
-          content: TextField(
-            controller: _quantityController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(hintText: 'Enter Quantity'),
+          title: const Text('Edit Line'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: costController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText:
+                      widget.invoiceLines[index].unitCost.toStringAsFixed(2),
+                  label: const Text("Cost"),
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              TextFormField(
+                controller: descriptionController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  hintText: widget.invoiceLines[index].description ?? "",
+                  label: const Text("Description"),
+                ),
+                maxLines: 3,
+              ),
+            ],
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
-                _quantityController.clear();
+                costController.clear();
+                descriptionController.clear();
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Save'),
+              child: const Text('Save'),
               onPressed: () {
                 setState(() {
-                  //_quantities[index] = int.parse(_quantityController.text);
+                  widget.invoiceLines[index].description =
+                      descriptionController.text == ""
+                          ? null
+                          : descriptionController.text;
+                  widget.invoiceLines[index].unitCost =
+                      double.tryParse(costController.text) != null
+                          ? double.parse(costController.text)
+                          : widget.invoiceLines[index].unitCost;
                 });
-                _quantityController.clear();
+                descriptionController.clear();
+                costController.clear();
                 Navigator.of(context).pop();
               },
             ),

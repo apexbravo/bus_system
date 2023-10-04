@@ -1,8 +1,41 @@
+import 'package:bus_system/models/currency.dart';
 import 'package:bus_system/models/guid.dart';
+import 'package:bus_system/models/payment_method.dart';
 import 'package:bus_system/models/price.dart';
 import 'package:bus_system/models/transport_service.dart';
 
 class Db {
+  static List<Currency> currencies = [
+    Currency(
+      id: "USD",
+      code: "USD",
+      symbol: "US\$",
+      name: "United States Dollar",
+      rate: 1,
+      lastUpdate: DateTime(2023, 9, 17),
+    ),
+    Currency(
+      id: "ZWL",
+      code: "ZWL",
+      symbol: "\$",
+      name: "Zimbabwean Dollar",
+      rate: 6000,
+      lastUpdate: DateTime(2023, 9, 17),
+    ),
+    Currency(
+      id: "ZAR",
+      code: "ZAR",
+      symbol: "R",
+      name: "South African Rand",
+      rate: 20,
+      lastUpdate: DateTime(2023, 9, 17),
+    )
+  ];
+  static List<PaymentMethod> paymentMethods = [
+    PaymentMethod(id: 0, name: "Cash", requireRef: false),
+    PaymentMethod(id: 1, name: "Bank", requireRef: true),
+    PaymentMethod(id: 2, name: "Pay on Delivery", requireRef: false)
+  ];
   static List<TransportService> services = [
     TransportService(id: Guid.newId(), name: "Laugage", category: "Laugage"),
     TransportService(

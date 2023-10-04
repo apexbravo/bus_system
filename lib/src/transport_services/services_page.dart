@@ -61,7 +61,7 @@ class _ServicesPageState extends State<ServicesPage> {
                   title: Text(service.name),
                   subtitle: Text(service.category ?? ''),
                   trailing: Text(service.price != null
-                      ? toMoney(service.price!.amount)
+                      ? toMoney(service.price!.amount, Db.currencies.first)
                       : ''),
                 );
               },
