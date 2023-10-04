@@ -82,7 +82,9 @@ class _CurrencyListState extends State<CurrencyList> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CurrencyDetails(),
+                              builder: (context) => CurrencyDetails(
+                                currency: currency,
+                              ),
                             ),
                           );
                         },
