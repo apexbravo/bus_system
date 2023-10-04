@@ -247,7 +247,7 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.only(
                           top: 8, bottom: 8, left: 0, right: 0),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
@@ -303,11 +303,11 @@ class _HomeState extends State<Home> {
                                     child: Column(
                                       children: [
                                         Icon(
-                                          FeatherIcons.download,
+                                          FeatherIcons.file,
                                           size: 36.0,
                                           color: primaryColor,
                                         ),
-                                        Text("Ticket Prices",
+                                        Text("Ticket\nPrices",
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.normal,
@@ -353,6 +353,9 @@ class _HomeState extends State<Home> {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 64,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -374,7 +377,7 @@ class _HomeState extends State<Home> {
                                     child: Column(
                                       children: [
                                         Icon(
-                                          FeatherIcons.shoppingBag,
+                                          FeatherIcons.users,
                                           size: 36.0,
                                           color: primaryColor,
                                         ),
@@ -426,46 +429,49 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const CurrencyList()),
+                                    );
+                                    //await Navigator.pushNamed(context, '/sales');
+                                  },
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: 1.0,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          FeatherIcons.dollarSign,
+                                          size: 36.0,
+                                          color: primaryColor,
+                                        ),
+                                        Text(
+                                          "Currency",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 12.0),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 64,
                           ),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Expanded(
-                                  child: TextButton(
-                                    onPressed: () async {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const CurrencyList()),
-                                      );
-                                      //await Navigator.pushNamed(context, '/sales');
-                                    },
-                                    child: const Padding(
-                                      padding: EdgeInsets.only(
-                                        bottom: 1.0,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Icon(
-                                            FeatherIcons.dollarSign,
-                                            size: 36.0,
-                                            color: primaryColor,
-                                          ),
-                                          Text(
-                                            "Currency",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 12.0),
-                                            textAlign: TextAlign.center,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
                                 Expanded(
                                   child: TextButton(
                                     onPressed: () async {
@@ -484,7 +490,7 @@ class _HomeState extends State<Home> {
                                       child: Column(
                                         children: [
                                           Icon(
-                                            FeatherIcons.menu,
+                                            FeatherIcons.refreshCcw,
                                             size: 36.0,
                                             color: primaryColor,
                                           ),
@@ -501,7 +507,10 @@ class _HomeState extends State<Home> {
                                     ),
                                   ),
                                 ),
-                              ])
+                              ]),
+                          SizedBox(
+                            height: 64,
+                          ),
                         ],
                       ),
                     ),
