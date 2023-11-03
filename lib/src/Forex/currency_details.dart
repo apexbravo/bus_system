@@ -1,40 +1,116 @@
+import 'package:bus_system/models/currency.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
 
-class CurrencyDetails extends StatefulWidget {
-  const CurrencyDetails({super.key});
+class CurrencyDetails extends StatelessWidget {
+  final Currency currency;
+  const CurrencyDetails({Key? key, required this.currency}) : super(key: key);
 
-  @override
-  State<CurrencyDetails> createState() => _CurrencyDetailsState();
-}
-
-class _CurrencyDetailsState extends State<CurrencyDetails> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppTheme.defaultTheme.cardColor,
-      resizeToAvoidBottomInset: false,
-      body: currencyDetails(context),
-    );
-  }
-
-  Widget currencyDetails(BuildContext context) {
     return AppScaffold(
+        appBar: AppBar(
+          title: Text("Currency details"),
+        ),
         currentTab: "",
-        body: Column(
-          children: [
-            AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              toolbarHeight: 10,
-            ),
-            // buildUserInfoDisplay(customer.fullname, 'Name'),
-            // buildUserInfoDisplay(customer.phone, 'Phone'),
-            // buildUserInfoDisplay(customer.email, 'Email'),
-            // buildUserInfoDisplay(customer.address ?? ' ', 'Address'),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                toolbarHeight: 10,
+              ),
+              buildUserInfoDisplay(currency.code, "code"),
+              buildUserInfoDisplay(currency.name, 'Phone'),
+              buildUserInfoDisplay(currency.symbol, 'Email'),
+              buildUserInfoDisplay(
+                  currency.lastUpdate.toString() ?? ' ', 'Address'),
+            ],
+          ),
         ));
   }
+
+  Widget buildUserInfoDisplay(String getValue, String title) => Padding(
+      padding: EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey,
+            ),
+          ),
+          const SizedBox(
+            height: 1,
+          ),
+          Container(
+              width: 350,
+              height: 40,
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                color: Colors.grey,
+                width: 1,
+              ))),
+              child: Text(
+                textAlign: TextAlign.left,
+                getValue,
+                style: const TextStyle(fontSize: 16, height: 1.4),
+              )),
+        ],
+      ));
+
+  Widget buildAbout(Currency currency) => Padding(
+      padding: EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Tell Us About Yourself',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey,
+            ),
+          ),
+          const SizedBox(height: 1),
+          Container(
+              width: 350,
+              height: 200,
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                color: Colors.grey,
+                width: 1,
+              ))),
+              child: Row(children: [
+                Expanded(
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                            child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  currency.name,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    height: 1.4,
+                                  ),
+                                ))))),
+                Icon(
+                  Icons.keyboard_arrow_right,
+                  color: Colors.grey,
+                  size: 40.0,
+                )
+              ]))
+        ],
+      ));
 }
