@@ -178,7 +178,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                                 Text(
-                                  "John Doe",
+                                  SessionManagers.currentUser!.name,
                                   style: TextStyle(
                                       color: AppTheme.defaultTheme.cardColor,
                                       fontSize: 16,

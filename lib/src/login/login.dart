@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bus_system/auth/session_Managers.dart';
 import 'package:bus_system/home.dart';
+import 'package:bus_system/models/role.dart';
 import 'package:bus_system/models/user.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:bus_system/theme/app_theme.dart';
@@ -287,36 +288,35 @@ class _LoginPageState extends State<LoginPage> {
       if (user == null || !user.isActive) {
         bool isFirstLogin = await checkIfFirstLogin();
         String hashedPassword = hashPassword(passwordController.text);
-        // if (isFirstLogin) {
-        //   // Create and save the superuser
-        //   User superUser = User(
-        //     name: "Administrator",
-        //     password: hashedPassword,
-        //     initials: "AD",
-        //     email: usernameController.text,
-        //     userRole: adminRole,
-        //     isActive: true,
-        //     tokenExpiryDate: DateTime.now().add(Duration(hours: 1)),
-        //   );
+        if (isFirstLogin) {
+          // Create and save the superuser
+          User superUser = User(
+            name: "Administrator",
+            password: hashedPassword,
+            initials: "AD",
+            email: usernameController.text,
+            userRole: adminRole,
+            isActive: true,
+            tokenExpiryDate: DateTime.now().add(Duration(hours: 1)),
+          );
 
-        //   // Save the superuser to the "users" collection in Firebase
-        //   await FirebaseDb.collection('users')
-        //       .doc(superUser.id)
-        //       .set(superUser.toJson());
+          // Save the superuser to the "users" collection in Firebase
+          await FirebaseDb.collection('users')
+              .doc(superUser.id)
+              .set(superUser.toJson());
 
-        //   // await FirebaseFirestore.instance
-        //   //     .collection('userRoles')
-        //   //     .add(adminRole.toJson());
-        //   // await FirebaseFirestore.instance
-        //   //     .collection('userRoles')
-        //   //     .add(cashierRole.toJson());
-        //   AppScaffold.isLoggedIn = true;
-        //   SessionManagers.signIn(superUser);
+/*           await FirebaseFirestore.instance
+              .collection('userRoles')
+              .add(adminRole.toJson());
+          await FirebaseFirestore.instance
+              .collection('userRoles')
+              .add(cashierRole.toJson()); */
+          AppScaffold.isLoggedIn = true;
+          SessionManagers.signIn(superUser);
 
-        //   await Navigator.pushReplacementNamed(
-        //       context, ModalRoute.of(context)!.settings.name!);
-        //   await Hive.box<User>('users').add(superUser);
-        // }
+          await Navigator.pushReplacementNamed(
+              context, ModalRoute.of(context)!.settings.name!);
+        }
 
         // Handle error, user not found or inactive
         // For example, show an error message to the user

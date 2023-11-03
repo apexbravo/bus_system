@@ -1,5 +1,6 @@
 import 'package:bus_system/auth/session_Managers.dart';
 import 'package:bus_system/firebase_options.dart';
+import 'package:bus_system/home.dart';
 import 'package:bus_system/src/login/login.dart';
 import 'package:bus_system/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,7 +41,10 @@ class MainApp extends StatelessWidget {
       supportedLocales: const [
         Locale('en', ''),
       ],
-      home: const LoginPage(),
+      home: const Home(),
+      routes: {
+        '/login': (context) => const LoginPage(),
+      },
     );
   }
 }
