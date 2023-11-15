@@ -8,6 +8,7 @@ import 'package:bus_system/src/notifications/notifications.dart';
 import 'package:bus_system/src/payment_methods/method_list.dart';
 import 'package:bus_system/src/receipting/new_ticket/new_ticket_tab_controller.dart';
 import 'package:bus_system/src/reports/transaction_summary.dart';
+import 'package:bus_system/src/routes/routes_page.dart';
 import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
 import 'package:bus_system/src/transport_services/services_page.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
@@ -401,7 +402,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const ServicesPage()),
+                                              const RoutesPage()),
                                     );
                                     //await Navigator.pushNamed(context, '/sales');
                                   },
@@ -412,12 +413,12 @@ class _HomeState extends State<Home> {
                                     child: Column(
                                       children: [
                                         Icon(
-                                          FeatherIcons.shoppingBag,
+                                          Icons.route,
                                           size: 36.0,
                                           color: primaryColor,
                                         ),
                                         Text(
-                                          "Services",
+                                          "Routes",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.normal,

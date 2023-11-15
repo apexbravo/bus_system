@@ -2,7 +2,10 @@ import 'package:bus_system/models/currency.dart';
 import 'package:bus_system/models/guid.dart';
 import 'package:bus_system/models/payment_method.dart';
 import 'package:bus_system/models/price.dart';
+import 'package:bus_system/models/sub_route.dart';
 import 'package:bus_system/models/transport_service.dart';
+
+import 'Route.dart';
 
 class Db {
   static List<Currency> currencies = [
@@ -87,4 +90,6 @@ class Db {
       price: Price(amount: 8),
     ),
   ];
+  static List<Route> routes = [];
+  static List<SubRoute> subRoutes = [];
 }
