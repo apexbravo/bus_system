@@ -20,7 +20,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     ),
     NotificationData(
       message: "Prices have changed!",
-      timestamp: DateTime.now().subtract(Duration(hours: 1)),
+      timestamp: DateTime.now().subtract(const Duration(hours: 1)),
       importanceLevel: ImportanceLevel.low,
       isRead: true,
     ),

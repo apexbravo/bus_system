@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bus_system/auth/session_Managers.dart';
-import 'package:bus_system/src/Forex/add_currency.dart';
 import 'package:bus_system/src/Forex/currency_list.dart';
 import 'package:bus_system/src/customers/customerlist.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
@@ -9,13 +8,13 @@ import 'package:bus_system/src/payment_methods/method_list.dart';
 import 'package:bus_system/src/receipting/new_ticket/new_ticket_tab_controller.dart';
 import 'package:bus_system/src/reports/transaction_summary.dart';
 import 'package:bus_system/src/routes/routes_page.dart';
-import 'package:bus_system/src/sample_feature/sample_item_list_view.dart';
-import 'package:bus_system/src/transport_services/services_page.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:bus_system/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:sliver_header_delegate/sliver_header_delegate.dart';
+
+import 'src/ticketing/new_ticket.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -261,7 +260,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const NewTicketTabController()),
+                                              const NewTicket()),
                                     );
                                     //await Navigator.pushNamed(context, '/sales');
                                   },
@@ -327,7 +326,7 @@ class _HomeState extends State<Home> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                TranSummary()));
+                                                const TranSummary()));
                                   },
                                   child: const Padding(
                                     padding: EdgeInsets.all(6.0),
@@ -354,7 +353,7 @@ class _HomeState extends State<Home> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 64,
                           ),
                           Row(
@@ -467,7 +466,7 @@ class _HomeState extends State<Home> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 64,
                           ),
                           Row(
@@ -509,7 +508,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ]),
-                          SizedBox(
+                          const SizedBox(
                             height: 64,
                           ),
                         ],

@@ -72,6 +72,8 @@ class _AddRouteState extends State<AddRoute> {
 
   @override
   Widget build(BuildContext context) {
+    routeController.text =
+        "${Db.currentRoute.pointA} to ${Db.currentRoute.pointB}";
     return AppScaffold(
       currentTab: "Routes",
       appBar: AppBar(
@@ -83,7 +85,7 @@ class _AddRouteState extends State<AddRoute> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Pick a route",
+              "Current Route",
               style: textStyle,
             ),
             SizedBox(
@@ -107,7 +109,13 @@ class _AddRouteState extends State<AddRoute> {
                       radius: 25,
                       child: IconButton(
                         icon: const Icon(Icons.swap_horiz),
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            var temp = Db.currentRoute.pointA;
+                            Db.currentRoute.pointA = Db.currentRoute.pointB;
+                            Db.currentRoute.pointB = temp;
+                          });
+                        },
                       ),
                     ),
                   ),

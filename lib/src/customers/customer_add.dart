@@ -78,7 +78,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
                   _name = value!;
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               TextFormField(
@@ -93,7 +93,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
                   _avatarUrl = value ?? '';
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               TextFormField(
@@ -114,7 +114,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
                   _email = value!;
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               TextFormField(
@@ -133,7 +133,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
                   _phone = value!;
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               TextFormField(

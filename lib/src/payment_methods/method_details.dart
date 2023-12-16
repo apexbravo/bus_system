@@ -27,14 +27,14 @@ class _MethodDetailsState extends State<MethodDetails> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            child: Column(
+            child: const Column(
               children: [
                 Text("Payment method"),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 Text("Cash"),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 Text("Payment reference")

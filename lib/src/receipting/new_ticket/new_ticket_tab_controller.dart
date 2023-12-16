@@ -1,4 +1,3 @@
-import 'package:bus_system/src/helper.dart';
 import 'package:bus_system/src/receipting/new_ticket/ticket_lines_page.dart';
 import 'package:bus_system/src/widgets/service_list.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,7 @@ import '../../../models/invoice_line.dart';
 import '../../widgets/app_scaffold.dart';
 
 class NewTicketTabController extends StatefulWidget {
-  const NewTicketTabController({Key? key});
+  const NewTicketTabController({super.key});
 
   @override
   State<NewTicketTabController> createState() => _NewTicketTabControllerState();
@@ -108,7 +107,7 @@ class _NewTicketTabControllerState extends State<NewTicketTabController>
         }),
         floatingActionButton: _tabController.index != 0
             ? FloatingActionButton(
-                child: Icon(Icons.check_circle),
+                child: const Icon(Icons.check_circle),
                 onPressed: () {
                   setState(() {
                     _tabController.index = 0;

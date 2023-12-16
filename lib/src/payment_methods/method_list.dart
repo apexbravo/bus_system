@@ -33,18 +33,18 @@ class _MethodListState extends State<MethodList> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddMethod(),
+                builder: (context) => const AddMethod(),
               ),
             );
           },
-          child: Icon(
+          child: const Icon(
             FeatherIcons.plus,
             color: Colors.white,
           ),
         ),
         currentTab: "",
         appBar: AppBar(
-          title: Text("Payment methods"),
+          title: const Text("Payment methods"),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,7 @@ class _MethodListState extends State<MethodList> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
@@ -82,18 +82,18 @@ class _MethodListState extends State<MethodList> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MethodDetails(),
+                              builder: (context) => const MethodDetails(),
                             ),
                           );
                         },
-                        leading: Text(""),
+                        leading: const Text(""),
                         title: Text(method.name ?? ''),
                         subtitle: Row(
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text(method.name ?? ''),
                               ],
                             ),

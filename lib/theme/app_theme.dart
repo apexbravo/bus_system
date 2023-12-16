@@ -319,7 +319,7 @@ class AppTheme {
             const FloatingActionButtonThemeData(backgroundColor: primaryColor),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            elevation: MaterialStateProperty.all(0),
+            elevation: MaterialStateProperty.all(1),
             textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 18.0,

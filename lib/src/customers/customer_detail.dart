@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:bus_system/models/customer.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
@@ -14,7 +13,7 @@ class CustomerDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       appBar: AppBar(
-        title: Text('Customer Details'),
+        title: const Text('Customer Details'),
       ),
       currentTab: 'Customers',
       body: Column(
@@ -40,7 +39,7 @@ class CustomerDetailsPage extends StatelessWidget {
   }
 
   Widget buildUserInfoDisplay(String getValue, String title) => Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -74,11 +73,11 @@ class CustomerDetailsPage extends StatelessWidget {
 
   // Widget builds the About Me Section
   Widget buildAbout(Customer customer) => Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Tell Us About Yourself',
             style: TextStyle(
               fontSize: 15,
@@ -90,7 +89,7 @@ class CustomerDetailsPage extends StatelessWidget {
           Container(
               width: 350,
               height: 200,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   border: Border(
                       bottom: BorderSide(
                 color: Colors.grey,
@@ -101,17 +100,17 @@ class CustomerDetailsPage extends StatelessWidget {
                     child: TextButton(
                         onPressed: () {},
                         child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                             child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
                                   customer.fullname,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     height: 1.4,
                                   ),
                                 ))))),
-                Icon(
+                const Icon(
                   Icons.keyboard_arrow_right,
                   color: Colors.grey,
                   size: 40.0,

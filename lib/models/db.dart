@@ -92,4 +92,5 @@ class Db {
   ];
   static List<Route> routes = [];
   static List<SubRoute> subRoutes = [];
+  static Route currentRoute = Route(pointA: "Harare", pointB: "Bulawayo");
 }

@@ -123,7 +123,6 @@ class _LoginPageState extends State<LoginPage> {
                       suffixIcon: const Icon(Icons.close),
                     ),
                     keyboardType: TextInputType.name,
-                    textCapitalization: TextCapitalization.characters,
                     style: const TextStyle(color: Colors.black),
                     onSaved: (String? value) {},
                     validator: (String? value) {
@@ -167,7 +166,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     keyboardType: TextInputType.visiblePassword,
-                    textCapitalization: TextCapitalization.characters,
                     style: const TextStyle(color: Colors.black),
                     onSaved: (String? value) {},
                     validator: (String? value) {
@@ -297,7 +295,7 @@ class _LoginPageState extends State<LoginPage> {
             email: usernameController.text,
             userRole: adminRole,
             isActive: true,
-            tokenExpiryDate: DateTime.now().add(Duration(hours: 1)),
+            tokenExpiryDate: DateTime.now().add(const Duration(hours: 1)),
           );
 
           // Save the superuser to the "users" collection in Firebase

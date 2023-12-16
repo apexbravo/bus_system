@@ -1,4 +1,3 @@
-import 'package:bus_system/models/item_size.dart';
 import 'package:bus_system/models/price.dart';
 
 class TransportService {

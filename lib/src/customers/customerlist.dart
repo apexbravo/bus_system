@@ -16,7 +16,7 @@ class CustomersPage extends StatelessWidget {
       currentTab: "/Customers",
       pageTitle: "Customers",
       appBar: AppBar(
-        title: Text('Customers'),
+        title: const Text('Customers'),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -45,7 +45,7 @@ class CustomersPage extends StatelessWidget {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
@@ -69,14 +69,14 @@ class CustomersPage extends StatelessWidget {
                           ),
                         );
                       },
-                      leading: CircleAvatar(
+                      leading: const CircleAvatar(
                         backgroundImage: AssetImage('assets/images/avatar.png'),
                       ),
                       title: Text(customer.fullname ?? ''),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(customer.phone ?? ''),
                         ],
                       ),
@@ -94,11 +94,11 @@ class CustomersPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddCustomerPage(),
+              builder: (context) => const AddCustomerPage(),
             ),
           );
         },
-        child: Icon(
+        child: const Icon(
           FeatherIcons.plus,
           color: Colors.white,
         ),

@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:bus_system/models/Userrights.dart';
 import 'package:bus_system/models/customer.dart';
 import 'package:bus_system/models/db.dart';
 import 'package:bus_system/models/enums/invoice_status.dart';
@@ -7,7 +6,6 @@ import 'package:bus_system/models/invoice.dart';
 import 'package:bus_system/models/invoice_line.dart';
 import 'package:bus_system/models/payment_method.dart';
 import 'package:bus_system/models/role.dart';
-import 'package:bus_system/models/transport_service.dart';
 import 'package:bus_system/models/user.dart';
 import 'package:bus_system/src/receipting/transactions/invoice_page.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -166,7 +164,7 @@ class TicketLinesPageState extends State<TicketLinesPage> {
                               elevation: 2,
                             ),
                           ),
-                          items: [],
+                          items: const [],
                           dropdownDecoratorProps: const DropDownDecoratorProps(
                             dropdownSearchDecoration: InputDecoration(
                               labelStyle: TextStyle(
@@ -259,7 +257,7 @@ class TicketLinesPageState extends State<TicketLinesPage> {
             ),
           ),
         ),
-        Divider(),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
@@ -286,7 +284,7 @@ class TicketLinesPageState extends State<TicketLinesPage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text('New Payment'),
+                        title: const Text('New Payment'),
                         content: StatefulBuilder(
                           builder:
                               (BuildContext context, StateSetter setState) {
@@ -295,7 +293,7 @@ class TicketLinesPageState extends State<TicketLinesPage> {
                               children: [
                                 Text(
                                     'Total price: \$${totalPrice.toStringAsFixed(2)}'),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 TextField(
                                   controller: _tenderedAmountController,
                                   onChanged: (value) {
@@ -327,13 +325,13 @@ class TicketLinesPageState extends State<TicketLinesPage> {
                         ),
                         actions: [
                           TextButton(
-                            child: Text('CANCEL'),
+                            child: const Text('CANCEL'),
                             onPressed: () {
                               Navigator.pop(context);
                             },
                           ),
                           TextButton(
-                            child: Text('OK'),
+                            child: const Text('OK'),
                             onPressed: () {
                               double tenderedAmount = double.tryParse(
                                       _tenderedAmountController.text) ??
@@ -349,7 +347,7 @@ class TicketLinesPageState extends State<TicketLinesPage> {
                                         name: "Daniel",
                                         initials: "initials",
                                         email: "d@gmail.com",
-                                        userRole: Role("name", Set())),
+                                        userRole: Role("name", <UserRights>{})),
                                     lines: widget.invoiceLines,
                                     status: InvoiceStatus.settled,
                                     amountTendered: double.parse(
@@ -375,7 +373,7 @@ class TicketLinesPageState extends State<TicketLinesPage> {
                     },
                   );
                 },
-                child: Icon(Icons.shopping_cart),
+                child: const Icon(Icons.shopping_cart),
               ),
             ],
           ),

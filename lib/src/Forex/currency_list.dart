@@ -33,18 +33,18 @@ class _CurrencyListState extends State<CurrencyList> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddCurrency(),
+                builder: (context) => const AddCurrency(),
               ),
             );
           },
-          child: Icon(
+          child: const Icon(
             FeatherIcons.plus,
             color: Colors.white,
           ),
         ),
         currentTab: "",
         appBar: AppBar(
-          title: Text("Currencies"),
+          title: const Text("Currencies"),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,7 @@ class _CurrencyListState extends State<CurrencyList> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
@@ -88,7 +88,7 @@ class _CurrencyListState extends State<CurrencyList> {
                             ),
                           );
                         },
-                        leading: Text(""),
+                        leading: const Text(""),
                         title: Text(currency.symbol),
                         subtitle: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,7 +96,7 @@ class _CurrencyListState extends State<CurrencyList> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text(currency.name),
                               ],
                             ),

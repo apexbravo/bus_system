@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 
-import 'guid.dart';
 
 @HiveType(typeId: 2)
 class Currency extends HiveObject {

@@ -43,7 +43,7 @@ class _AddMethodState extends State<AddMethod> {
     // You can now do something with the newCustomer object, like adding it to a list or storing it in a database.
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => MethodList()),
+      MaterialPageRoute(builder: (context) => const MethodList()),
     );
   }
 
@@ -59,14 +59,14 @@ class _AddMethodState extends State<AddMethod> {
   Widget addMethod(BuildContext context) {
     return AppScaffold(
       appBar: AppBar(
-        title: Text("Add payment method"),
+        title: const Text("Add payment method"),
       ),
       currentTab: "",
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Container(
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Form(
                 key: _formKey,
                 child: Column(

@@ -22,15 +22,15 @@ class _TranSummaryState extends State<TranSummary> {
   Widget repMobile(BuildContext context) {
     return AppScaffold(
       currentTab: "",
-      appBar: AppBar(title: Text("Transactions")),
+      appBar: AppBar(title: const Text("Transactions")),
       body: SingleChildScrollView(
         child: Container(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Expanded(
                   child: DataTableTheme(
                       data: DataTableThemeData(
@@ -46,7 +46,7 @@ class _TranSummaryState extends State<TranSummary> {
                           headingRowColor: MaterialStateProperty.resolveWith(
                               (states) => accentCircleColor),
                           showCheckboxColumn: false,
-                          columns: <DataColumn>[
+                          columns: const <DataColumn>[
                             DataColumn(
                               label: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

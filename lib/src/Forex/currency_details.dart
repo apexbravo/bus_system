@@ -2,7 +2,6 @@ import 'package:bus_system/models/currency.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
 import 'package:flutter/material.dart';
 
-import '../../theme/app_theme.dart';
 
 class CurrencyDetails extends StatelessWidget {
   final Currency currency;
@@ -12,7 +11,7 @@ class CurrencyDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
         appBar: AppBar(
-          title: Text("Currency details"),
+          title: const Text("Currency details"),
         ),
         currentTab: "",
         body: Padding(
@@ -35,7 +34,7 @@ class CurrencyDetails extends StatelessWidget {
   }
 
   Widget buildUserInfoDisplay(String getValue, String title) => Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -68,11 +67,11 @@ class CurrencyDetails extends StatelessWidget {
       ));
 
   Widget buildAbout(Currency currency) => Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Tell Us About Yourself',
             style: TextStyle(
               fontSize: 15,
@@ -84,7 +83,7 @@ class CurrencyDetails extends StatelessWidget {
           Container(
               width: 350,
               height: 200,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   border: Border(
                       bottom: BorderSide(
                 color: Colors.grey,
@@ -95,17 +94,17 @@ class CurrencyDetails extends StatelessWidget {
                     child: TextButton(
                         onPressed: () {},
                         child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                             child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
                                   currency.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     height: 1.4,
                                   ),
                                 ))))),
-                Icon(
+                const Icon(
                   Icons.keyboard_arrow_right,
                   color: Colors.grey,
                   size: 40.0,

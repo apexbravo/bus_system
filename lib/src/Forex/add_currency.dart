@@ -48,7 +48,7 @@ class _AddCurrencyState extends State<AddCurrency> {
     // You can now do something with the newCustomer object, like adding it to a list or storing it in a database.
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CurrencyList()),
+      MaterialPageRoute(builder: (context) => const CurrencyList()),
     );
   }
 
@@ -65,13 +65,13 @@ class _AddCurrencyState extends State<AddCurrency> {
     return AppScaffold(
       currentTab: "Currency",
       appBar: AppBar(
-        title: Text("Add currency"),
+        title: const Text("Add currency"),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Form(
                 key: _formKey,
                 child: Column(
