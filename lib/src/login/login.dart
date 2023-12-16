@@ -236,35 +236,6 @@ class _LoginPageState extends State<LoginPage> {
                         style: const TextStyle(color: Colors.red),
                       ),
                     ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     const Text(
-                  //       "Do not have account?",
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //       ),
-                  //     ),
-                  //     const SizedBox(width: 8.0),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) => SignUpPage(login: true),
-                  //           ),
-                  //         );
-                  //       },
-                  //       child: Text(
-                  //         "Signup",
-                  //         style: TextStyle(
-                  //           color: buttonPrimary,
-                  //           decoration: TextDecoration.underline,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               ),
             ),

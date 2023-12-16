@@ -77,7 +77,14 @@ class _NewTicketState extends State<NewTicket> {
     return AppScaffold(
       currentTab: "Tickets",
       appBar: AppBar(
-        title: const Text("New Ticket"),
+        title: const Text(
+          "New Ticket",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -103,6 +110,9 @@ class _NewTicketState extends State<NewTicket> {
                   ),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             Card(
               margin: const EdgeInsets.all(0),
@@ -200,22 +210,22 @@ class _NewTicketState extends State<NewTicket> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text("Description"),
+                        const Text("Description"),
                         TextFormField(),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
-                        Text("Size"),
+                        const Text("Size"),
                         DropdownButtonFormField(
-                          items: [
+                          items: const [
                             DropdownMenuItem(child: Text("Large")),
                           ],
                           onChanged: (value) {},
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
-                        Text("Amount"),
+                        const Text("Amount"),
                         TextFormField(),
                       ],
                     ),
@@ -267,7 +277,9 @@ class _NewTicketState extends State<NewTicket> {
               height: mb,
             ),
             ElevatedButton(
-              style: AppTheme.tertiaryBtnStyle,
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll<Color>(buttonPrimary),
+              ),
               onPressed: () {},
               child: const Text("Next"),
             )

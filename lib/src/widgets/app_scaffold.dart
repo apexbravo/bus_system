@@ -17,17 +17,20 @@ class AppScaffold extends StatefulWidget {
   final bool showDrawer;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Widget? actions;
+  final bool defaultScrolling;
 
-  const AppScaffold(
-      {super.key,
-      required this.body,
-      this.appBar,
-      this.floatingActionButton,
-      this.showDrawer = false,
-      required this.currentTab,
-      this.pageTitle,
-      this.floatingActionButtonLocation,
-      this.actions});
+  const AppScaffold({
+    super.key,
+    required this.body,
+    this.appBar,
+    this.floatingActionButton,
+    this.showDrawer = false,
+    required this.currentTab,
+    this.pageTitle,
+    this.floatingActionButtonLocation,
+    this.actions,
+    this.defaultScrolling = true,
+  });
 
   static bool isMobileDevice(BuildContext context) =>
       MediaQuery.of(context).size.width < 600;
@@ -54,17 +57,13 @@ class _AppScaffoldState extends State<AppScaffold> {
     }
     bool isMobile = AppScaffold.isMobileDevice(context);
     return Scaffold(
-      body: widget.body,
-
+      body: widget.defaultScrolling
+          ? SingleChildScrollView(child: widget.body)
+          : widget.body,
       appBar: isMobile ? widget.appBar : null,
       floatingActionButton: isMobile ? widget.floatingActionButton : null,
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
       resizeToAvoidBottomInset: false,
-      // bottomNavigationBar: isMobile || AppScaffold.isTabletDevice(context)
-      //     ? AppBottomNav(
-      //         currentTab: widget.currentTab,
-      //       )
-      //     : null,
     );
   }
 }

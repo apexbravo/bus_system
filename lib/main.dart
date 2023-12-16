@@ -5,6 +5,7 @@ import 'package:bus_system/src/login/login.dart';
 import 'package:bus_system/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'src/settings/settings_controller.dart';
@@ -28,6 +29,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: secondaryColor,
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.defaultTheme,

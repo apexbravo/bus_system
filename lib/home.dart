@@ -5,7 +5,6 @@ import 'package:bus_system/src/Forex/currency_list.dart';
 import 'package:bus_system/src/customers/customerlist.dart';
 import 'package:bus_system/src/notifications/notifications.dart';
 import 'package:bus_system/src/payment_methods/method_list.dart';
-import 'package:bus_system/src/receipting/new_ticket/new_ticket_tab_controller.dart';
 import 'package:bus_system/src/reports/transaction_summary.dart';
 import 'package:bus_system/src/routes/routes_page.dart';
 import 'package:bus_system/src/widgets/app_scaffold.dart';
@@ -65,6 +64,7 @@ class _HomeState extends State<Home> {
     return AppScaffold(
       body: homeMobile(),
       currentTab: 'Home',
+      defaultScrolling: false,
     );
   }
 

@@ -291,20 +291,21 @@ class AppTheme {
         ),
         textTheme: GoogleFonts.poppinsTextTheme(base.textTheme),
         appBarTheme: const AppBarTheme(
-            backgroundColor: secondaryColor,
-            elevation: 0,
-            titleTextStyle: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 14.0),
-            systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarBrightness: Brightness.light,
-                statusBarColor: brandColor),
-            shape: Border(
-                bottom: BorderSide(
+          backgroundColor: secondaryColor,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18.0,
+          ),
+          centerTitle: true,
+          shape: Border(
+            bottom: BorderSide(
               color: primaryColor,
               width: 2,
-            ))),
+            ),
+          ),
+        ),
         inputDecorationTheme: const InputDecorationTheme(
           filled: true,
           fillColor: Color(0xFFF8F8F9),
